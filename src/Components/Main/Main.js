@@ -12,7 +12,7 @@ export default function Main() {
 
   return (
     <Grid container spasing={1}>
-      <Grid item xs='12'>
+      <Grid item xs={12}>
         <Button variant='contained' color='primary' className={classes.button}>Самый быстрый</Button>
         <Button variant='outlined' className={classes.button}>Самый дешевый</Button>
       </Grid>

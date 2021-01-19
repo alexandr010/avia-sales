@@ -40,7 +40,7 @@ export default function Filter() {
         <FormLabel component="legend">Количество пересадок</FormLabel>
         <FormGroup>
           <FormControlLabel
-            control={<Checkbox checked={all} onChange={handleChange} name="all" />}
+            control={<Checkbox checked={all} onChange={handleChange} name="all" color='primary'/>}
             label="Все"
           />
           <FormControlLabel

@@ -1,6 +1,7 @@
 import { Container, Grid } from '@material-ui/core';
 import Filter from './Components/Filter/Filter';
 import Main from './Components/Main/Main'
+import Tickets from './Components/Tickets/Tickets'
 import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -30,12 +31,13 @@ function App() {
         <img src='https://upload.wikimedia.org/wikipedia/commons/c/cd/Aviasales_logo.png' alt='logo' className={classes.imgLogo}></img>
       </div>
       <Grid container spasing={2}>
-        <Grid item xs='4'>
+        <Grid item xs={4}>
           <Filter />
         </Grid>
-        <Grid item xs='8'>
+        <Grid item xs={8}>
           <Grid container justify="center">
             <Main />
+            <Tickets/>
           </Grid>
         </Grid>
       </Grid>
