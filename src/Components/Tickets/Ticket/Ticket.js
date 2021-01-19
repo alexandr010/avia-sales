@@ -62,8 +62,9 @@ export default function Ticket({ item }) {
     }
   };
 
-  const arrStops = item.segments[0].stops;
   const arrStopsReturn = item.segments[1].stops;
+  const arrStops = item.segments[0].stops;
+  
 
   return (
     <Card className={classes.root}>
