@@ -20,19 +20,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Filter() {
   const classes = useStyles();
-  const [state, setState] = useState({
-    all: false,
-    noneTransfer: false,
-    oneTransfer: false,
-    twoTransfer: false,
-    threeTransfer: false,
-  });
+  const [state, setState] = useState([]);
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    let newState = [];
+      if(event.target.checked){
+      newState = [ ...state, parseInt(event.target.value)]
+    } else {
+      newState = state.filter((item) => item !== parseInt(event.target.value))
+    }
+    setState(newState);
   };
-
-  const {all, noneTransfer, oneTransfer, twoTransfer, threeTransfer } = state;
 
   return (
     <List className={classes.root}>
@@ -40,23 +38,19 @@ export default function Filter() {
         <FormLabel component="legend">Количество пересадок</FormLabel>
         <FormGroup>
           <FormControlLabel
-            control={<Checkbox checked={all} onChange={handleChange} name="all" color='primary'/>}
-            label="Все"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={noneTransfer} onChange={handleChange} name="noneTransfer" />}
+            control={<Checkbox value={0} checked={state.includes(0)} onChange={handleChange} name="noneTransfer" />}
             label="Без пересадки"
           />
           <FormControlLabel
-            control={<Checkbox checked={oneTransfer} onChange={handleChange} name="oneTransfer" />}
+            control={<Checkbox value={1} checked={state.includes(1)} onChange={handleChange} name="oneTransfer" />}
             label="1 пересадка"
           />
           <FormControlLabel
-            control={<Checkbox checked={twoTransfer} onChange={handleChange} name="twoTransfer" />}
+            control={<Checkbox value={2} checked={state.includes(2)} onChange={handleChange} name="twoTransfer" />}
             label="2 пересадки"
           />
           <FormControlLabel
-            control={<Checkbox checked={threeTransfer} onChange={handleChange} name="threeTransfer" />}
+            control={<Checkbox value={3} checked={state.includes(3)} onChange={handleChange} name="threeTransfer" />}
             label="3 пересадки"
           />
         </FormGroup>

@@ -13,15 +13,23 @@ export default function Tickets() {
   const [tickets, setTickets] = useState([]);
   const [error, setError] = useState();
   const [page, setPage] = useState(1);
+  const [transfer, setTransfer] = useState([]);
 
   const handleChange = (event, value) => {
     setPage(value);
   };
 
   const filteredTicket = useMemo(() => {
-    return tickets[page - 1] || [];
-  }, [tickets, page]);
-
+    const filtered = tickets.filter((item) => {
+      if(transfer.length > 0){
+        return transfer.includes(item.segments[0].stops.length);
+      }
+      return item;
+    })
+    return chunk(filtered, 10);
+  }, [tickets, transfer]);
+  
+  
 
   const getData = useCallback(async () => {
     try {
@@ -29,7 +37,7 @@ export default function Tickets() {
       const result = await fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${res.searchId}`);
       const ticket = await result.json();
       console.log(ticket)
-      setTickets(chunk(ticket.tickets, 10));
+      setTickets(ticket.tickets);
       setError(null)
     } catch (error) {
       setError(error);
@@ -49,9 +57,10 @@ export default function Tickets() {
   }
 
   return (<>
-    {filteredTicket.map(item => <Ticket item={item}/>
+
+    {(filteredTicket[page - 1] || []).map(item => <Ticket item={item}/>
   )}
-    <Pagination count={tickets.length} page={page} onChange={handleChange} />
+    <Pagination count={filteredTicket.length} page={page} onChange={handleChange} />
   </>
   );
 }
