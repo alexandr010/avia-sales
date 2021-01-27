@@ -18,11 +18,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Filter() {
+export default function Filter({setTransfer}) {
   const classes = useStyles();
   const [state, setState] = useState([]);
 
   const handleChange = (event) => {
+  
     let newState = [];
       if(event.target.checked){
       newState = [ ...state, parseInt(event.target.value)]
@@ -30,6 +31,7 @@ export default function Filter() {
       newState = state.filter((item) => item !== parseInt(event.target.value))
     }
     setState(newState);
+    setTransfer(newState);
   };
 
   return (
